@@ -1,4 +1,4 @@
-const dateFormat = require('../utils/dateFormat');
+// const dateFormat = require('../utils/dateFormat');
 
 const { Schema, model, Types } = require('mongoose');
 
@@ -50,17 +50,9 @@ const ThoughtSchema = new Schema(
             required: true,
             trim: true
         },
-        
+});
 
-        toJSON: {
-            virtuals: true,
-            getters: true
-        },
-        id: false
-    }
-);
-
-const Thought = model('Thought', UserSchema);
+const Thought = model('Thought', ThoughtSchema);
 
 // get total count of comments and replies on retrieval
 ThoughtSchema.virtual('reactionCount').get(function () {
