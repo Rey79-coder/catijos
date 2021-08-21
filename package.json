@@ -1,0 +1,25 @@
+{
+  "name": "catijos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rey79-coder/catijos"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rey79-coder/catijos"
+  },
+  "homepage": "https://github.com/Rey79-coder/catijos",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.13.7"
+  }
+}
