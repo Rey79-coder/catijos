@@ -1,52 +1,4 @@
 
-// // const dateFormat = require('../utils/dateFormat');
-// const { Schema, model} = require('mongoose');
-
-// const UserSchema = new Schema(
-//     {
-//       username: {
-//         "_id": "objectId",
-//         type: String,
-//         lowercase: true,
-//         trim: true,
-//         index: true,
-//         unique: true,
-//         required: true
-//       },
-//       email: {
-//         type: String,
-//         lowercase: true,
-//         trim: true,
-//         index: true,
-//         unique: true,
-//         required: true
-//       },
-//       _id: [],
-//       thoughts: [
-//         {
-//           type: Schema.Types.ObjectId,
-//           ref: 'Thought'
-//         }
-//       ],
-//       friends: [
-//         {
-//           type: Schema.Types.ObjectId,
-//           ref: 'User'
-//         }
-//       ]
-//     },
-//   );
-  
-// const User = model('User', UserSchema);
-
-// // get total count of comments and replies on retrieval
-// UserSchema.virtual('friendCount').get(function() {
-//   return this.friends.length;
-// });
-
-// module.exports = User;
-
-
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
@@ -68,6 +20,29 @@ const userSchema = new Schema({
     match : [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/]
 	},
 
+  thoughts: [],
+  friends: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Thought'
+    }
+  ]
+},
+{
+  toJSON: {
+    virtuals: true,
+    getters: true
+  },
+  id: false
+
 });
+
+
+// UserSchema.virtual('thoughtCount').get(function() {
+//   return this.thought
+//   .reduce((total, thought) => total + comment.reactions.length + 1, 0);
+// });
+
+
 
 module.exports = mongoose.model('User', userSchema);
