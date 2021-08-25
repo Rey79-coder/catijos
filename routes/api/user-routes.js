@@ -10,7 +10,7 @@ const {
     deleteUser
   } = require('../../controllers/user-controller');
 
-// /api/users /  ALL USERS  
+// /api/users   /  ALL USERS  
 router
   .route('/')
   .get(getAllUser)
