@@ -1,6 +1,7 @@
 
 
 const mongoose = require('mongoose');
+
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -38,11 +39,13 @@ const userSchema = new Schema({
 });
 
 
-// UserSchema.virtual('thoughtCount').get(function() {
-//   return this.thought
-//   .reduce((total, thought) => total + comment.reactions.length + 1, 0);
-// });
+// const User = model('User', UserSchema);
 
+// get total count of thoughts and replies on retrieval
+// UserSchema.virtual('thoughtCount').get(function() {
+//   return this.thoughts
+//   .reduce((total, thought) => total + thought.reactions.length + 1, 0);
+// });
 
 
 module.exports = mongoose.model('User', userSchema);

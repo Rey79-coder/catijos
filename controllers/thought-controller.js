@@ -1,53 +1,52 @@
 const { User, Thought } = require('../models');
 
 const thoughtController = {
-  // add user
-  addThought({ params, body }, res) {
-    console.log(body);
-    Thought.create(body)
-      .then(({ _id }) => {
-        return Thought.findOneAndUpdate(
-          { _id: params.userId },
-          { $push: { users: _id } },
-          { new: true, runValidators: true }
-        );
+  // GET ALL THOUGHTS
+  getAllThoughts(req, res) {
+    Thought.find({})
+      .populate({
+        path: 'users',
+        select: '-__v'
       })
-      .then(dbUserData => {
-        if (!dbUserData) {
-          res.status(404).json({ message: 'No user found with this id!' });
+      .select('-__v')
+      .sort({ _id: -1 })
+      .then(dbThoughtData => res.json(dbThoughtData))
+      .catch(err => {
+        console.log(err);
+        res.status(400).json(err);
+      });
+  },
+
+  // GET ONE USER BY ID
+  getThoughtById({ params }, res) {
+    Thought.findOne({ _id: params.id })
+      .populate({
+        path: 'users',
+        select: '-__v'
+      })
+      .select('-__v')
+      .then(dbThoughtData => {
+        if (!dbThoughtData) {
+          res.status(404).json({ message: 'No thought found with this id!' });
           return;
         }
-        res.json(dbUserData);
+        res.json(dbThoughtData);
       })
+      .catch(err => {
+        console.log(err);
+        res.status(400).json(err);
+      });
+  },
+
+  // CREATE THOUGHT
+  createThought({ body }, res) {
+    Thought.create(body)
+      .then(dbThoughtData => res.json(dbThoughtData))
       .catch(err => res.json(err));
   },
 
-// remove user
-removeUser({ params }, res) {
-    User.findOneAndDelete({ _id: params.userId })
-    .then(deletedUser => {
-      if (!deletedUser) {
-        return res.status(404).json({ message: 'No user with this id!' });
-      }
-      return User.findOneAndUpdate(
-        { _id: params.userId },
-        { $pull: { users: params.userId } },
-        { new: true }
-      );
-    })
-    .then(dbUserData => {
-      if (!dbUserData) {
-        res.status(404).json({ message: 'No user found with this id!' });
-        return;
-      }
-      res.json(dbUserData);
-    })
-    .catch(err => res.json(err));
-
-},
-
-  // add reply to a comment
-  addReaction({ params, body }, res) {
+  // ADD REACTIONS TO THE THOUGHTS
+  createReaction({ params, body }, res) {
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
       { $push: { reactions: body } },
