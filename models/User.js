@@ -1,5 +1,3 @@
-
-
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
@@ -25,7 +23,8 @@ const userSchema = new Schema({
   friends: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Thought'
+      id: [""],
+      ref: 'User'
     }
   ]
 },
@@ -39,13 +38,11 @@ const userSchema = new Schema({
 });
 
 
-// const User = model('User', UserSchema);
-
-// get total count of thoughts and replies on retrieval
-// UserSchema.virtual('thoughtCount').get(function() {
-//   return this.thoughts
-//   .reduce((total, thought) => total + thought.reactions.length + 1, 0);
-// });
+// get total count of friends and reactions on retrieval
+userSchema.virtual('friendCount').get(function() {
+  return this.friends
+  .reduce((total, friend) => total + friend.reactions.length + 1, 0);
+});
 
 
 module.exports = mongoose.model('User', userSchema);
