@@ -1,4 +1,3 @@
-
 # catijos
 
 ## Table of Content
@@ -32,7 +31,7 @@
 ## For additional questions about README-Generator:
    Please reach me out through my email: verareyna79@gmail.com.
    Here is a video on how to work the application.
-#[Video](comming up...)
+#[Video](https://www.youtube.com/watch?v=4S6bJUFi3q0)
 
 For illustration purposes here is a snapshot of real live instance:
 #[Images](comming up...)
