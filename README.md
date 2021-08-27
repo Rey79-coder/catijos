@@ -34,5 +34,5 @@
 #[Video](https://www.youtube.com/watch?v=4S6bJUFi3q0)
 
 For illustration purposes here is a snapshot of real live instance:
-#[Images](comming up...)
+#[Images](https://github.com/Rey79-coder/catijos/blob/main/public/assets/img/catijos-api-routes.png)
 
