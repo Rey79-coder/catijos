@@ -39,10 +39,10 @@ const userSchema = new Schema({
 
 
 // get total count of friends and reactions on retrieval
-userSchema.virtual('friendCount').get(function() {
-  return this.friends
-  .reduce((total, friend) => total + friend.reactions.length + 1, 0);
-});
+// userSchema.virtual('friendCount').get(function() {
+//   return this.friends
+//   .reduce((total, friend) => total + friend.reactions.length + 1, 0);
+// });
 
 
 module.exports = mongoose.model('User', userSchema);

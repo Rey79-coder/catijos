@@ -23,7 +23,3 @@ router
 .delete(deleteThought);
 
 module.exports = router;
-
-
-
-
