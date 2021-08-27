@@ -73,15 +73,14 @@ const userController = {
 
 
   ///////////////
+
   // ADD FRIEND TO USER
   addFriend({ params }, res) {
-    User.updateOne
-    ({ _id: params.friendId })
+    User.findOneAndUpdate
+    ({ _id: params.userId },{$push:{friends:params.friendId}})
       .then(dbUserData => res.json(dbUserData))
       .catch(err => res.json(err));
   },
-
-
 
 
  // REMOVE FRIEND

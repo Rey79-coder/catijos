@@ -9,15 +9,15 @@ const {
  } = require('../../controllers/thought-controller');
 
 
-// /api/thoughts/
+// /api/thoughts/   /// CR  ALL THOUGHTS
 router
 .route('/')
 .get(getAllThoughts)
 .post(createThought);
 
-// /api/thoughts/:id
+// /api/thoughts/:id   ///  RUD THOUGHTS PER ID
 router
-.route('/:id')
+.route('/:id')   
 .get(getThoughtById)
 .put(updateThought)
 .delete(deleteThought);

@@ -18,7 +18,7 @@ router
   .get(getAllUser)
   .post(createUser);
 
-// /api/users/:id   /  PER ID
+// /api/users/:id   /  USER PER ID
 router
 .route('/:id')
 .get(getUserById)
@@ -26,7 +26,7 @@ router
 .delete(deleteUser);
 
 
-// /api/users/:userId/:thougthId
+// /api/users/:userId/:thougthId    /  CR FRIENDS
 router
 .route('/:userId/friends/:userId')
 .post(addFriend)
