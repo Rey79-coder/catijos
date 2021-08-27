@@ -1,6 +1,40 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
+const { Schema, model, Types } = require('mongoose');
+
+// const Schema = mongoose.Schema;
+
+
+const FriendSchema = new Schema(
+  {
+    // set custom id to avoid confusion with parent comment's _id field
+    friendId: {
+      type: Schema.Types.ObjectId,
+      default: () => new Types.ObjectId()
+    },
+    friendBody: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    writtenBy: {
+      type: String,
+      required: true
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      get: createdAtVal => dateFormat(createdAtVal)
+    }
+  },
+  {
+    toJSON: {
+      getters: true
+    }
+  }
+);
+
+
 
 const userSchema = new Schema({
 	username: 
@@ -19,14 +53,7 @@ const userSchema = new Schema({
     match : [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/]
 	},
 
-  thoughts: [],
-  friends: [
-    {
-      type: Schema.Types.ObjectId,
-      id: [""],
-      ref: 'User'
-    }
-  ]
+  friends: [FriendSchema]
 },
 {
   toJSON: {
@@ -38,11 +65,22 @@ const userSchema = new Schema({
 });
 
 
-// get total count of friends and reactions on retrieval
+// const User = model('User', userSchema);
+
+// // get total count of comments and replies on retrieval
 // userSchema.virtual('friendCount').get(function() {
-//   return this.friends
-//   .reduce((total, friend) => total + friend.reactions.length + 1, 0);
+//   return this.friends.length;
 // });
+
+
+
+const friendCount = mongoose.Schema({ _id: Number });
+
+// get total count of friends and reactions on retrieval
+friendCount.virtual('friendCount').get(function() {
+  return this.friends.length;
+  // .reduce((total, friends) => total + friends.length + 1, 0);
+});
 
 
 module.exports = mongoose.model('User', userSchema);

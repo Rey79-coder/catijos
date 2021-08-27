@@ -48,12 +48,7 @@ const ThoughtSchema = new Schema({
     required: true
   },
   // use ReactionSchema to validate data for a reaction.
-  reactions: [
-    {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  ],
+  reactions: [ReactionSchema],
 },
   {
     toJSON: {
